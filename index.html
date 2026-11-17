@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti, mi amor 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 50%, #ff6b9d 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #4a148c;
+  }
+
+  /* Corazones flotantes de fondo */
+  .heart-bg {
+    position: fixed;
+    top: -50px;
+    color: rgba(255, 105, 180, 0.6);
+    font-size: 20px;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+  }
+
+  /* Secciones */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* PANTALLA DE BIENVENIDA */
+  #welcome {
+    text-align: center;
+    cursor: pointer;
+  }
+  #welcome h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
+    color: #c2185b;
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.6);
+    animation: fadeIn 2s ease;
+  }
+  #welcome p {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    color: #6a1b4d;
+    animation: pulse 2s infinite;
+  }
+  .big-heart {
+    font-size: 6rem;
+    animation: beat 1.2s infinite;
+    display: inline-block;
+    margin: 30px 0;
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CONTADOR */
+  #counter { background: rgba(255,255,255,0.25); backdrop-filter: blur(10px); }
+  #counter h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #880e4f;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .timer {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .time-box {
+    background: rgba(255,255,255,0.7);
+    border-radius: 20px;
+    padding: 25px 30px;
+    min-width: 110px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(194, 24, 91, 0.3);
+    transition: transform 0.3s;
+  }
+  .time-box:hover { transform: translateY(-10px) rotate(-2deg); }
+  .time-box span {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #c2185b;
+  }
+  .time-box small {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6a1b4d;
+  }
+
+  /* RAZONES */
+  #reasons h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #880e4f;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+  }
+  .reason-card {
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 5px 20px rgba(194, 24, 91, 0.2);
+  }
+  .reason-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(194, 24, 91, 0.4);
+  }
+  .reason-card .icon { font-size: 3rem; margin-bottom: 15px; }
+  .reason-card h3 {
+    font-family: 'Dancing Script', cursive;
+    color: #c2185b;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  .reason-card p { color: #5d2a4a; line-height: 1.5; }
+
+  /* GALERÍA */
+  #gallery { background: rgba(255,255,255,0.2); }
+  #gallery h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #880e4f;
+    margin-bottom: 40px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+  }
+  .photo {
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.4s;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .photo:hover { transform: scale(1.08) rotate(2deg); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* CARTA */
+  #letter { background: rgba(255,255,255,0.3); }
+  .envelope {
+    width: 320px;
+    height: 220px;
+    background: #fff5f7;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(194, 24, 91, 0.4);
+    transition: transform 0.4s;
+  }
+  .envelope:hover { transform: scale(1.05); }
+  .envelope::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 110px solid #ff8fab;
+    transition: transform 0.6s;
+    transform-origin: top;
+  }
+  .envelope.open::before { transform: rotateX(180deg); }
+  .letter-content {
+    position: absolute;
+    top: 30px; left: 20px; right: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: #4a148c;
+    line-height: 1.6;
+    transform: translateY(0);
+    transition: transform 0.6s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .envelope.open .letter-content { transform: translateY(-180px); }
+  #letter h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #880e4f;
+    margin-bottom: 40px;
+  }
+  .hint { margin-top: 30px; color: #6a1b4d; font-style: italic; }
+
+  /* PREGUNTA TRAVIESA */
+  #question { background: rgba(255,255,255,0.25); }
+  #question h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #880e4f;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .buttons { display: flex; gap: 30px; position: relative; }
+  .btn-love {
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  #yesBtn {
+    background: linear-gradient(135deg, #ff4081, #c2185b);
+    color: white;
+  }
+  #yesBtn:hover { transform: scale(1.15); }
+  #noBtn {
+    background: #eee;
+    color: #666;
+    position: relative;
+  }
+  #celebration {
+    display: none;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    color: #c2185b;
+    font-family: 'Dancing Script', cursive;
+    animation: fadeIn 1s;
+  }
+
+  /* FINAL */
+  #final {
+    background: linear-gradient(135deg, #ff6b9d, #c2185b);
+    color: white;
+    text-align: center;
+  }
+  #final h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  }
+  #final p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+  .signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    #welcome h1 { font-size: 3rem; }
+    .big-heart { font-size: 4rem; }
+    #counter h2, #reasons h2, #gallery h2, #letter h2, #question h2, #final h2 {
+      font-size: 2.2rem;
+    }
+    .time-box { min-width: 80px; padding: 15px 20px; }
+    .time-box span { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Corazones flotantes generados por JS -->
+
+<!-- 1. BIENVENIDA -->
+<section id="welcome" onclick="scrollToSection('counter')">
+  <h1>Para ti, mi amor</h1>
+  <div class="big-heart">💖</div>
+  <p>Haz clic para comenzar nuestro viaje...</p>
+</section>
+
+<!-- 2. CONTADOR -->
+<section id="counter">
+  <h2>El tiempo a tu lado</h2>
+  <div class="timer">
+    <div class="time-box"><span id="days">0</span><small>Días</small></div>
+    <div class="time-box"><span id="hours">0</span><small>Horas</small></div>
+    <div class="time-box"><span id="minutes">0</span><small>Minutos</small></div>
+    <div class="time-box"><span id="seconds">0</span><small>Segundos</small></div>
+  </div>
+  <p style="margin-top:30px; font-style:italic; color:#6a1b4d;">...y cada segundo vale la pena</p>
+</section>
+
+<!-- 3. RAZONES -->
+<section id="reasons">
+  <h2>Razones por las que te amo</h2>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <div class="icon">😊</div>
+      <h3>Tu sonrisa</h3>
+      <p>Ilumina hasta mis días más grises y me hace sentir en casa.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">💭</div>
+      <h3>Tu forma de pensar</h3>
+      <p>Me inspiras a ser mejor persona cada día con tus ideas.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">🤗</div>
+      <h3>Tus abrazos</h3>
+      <p>Son mi refugio favorito en todo el universo.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">✨</div>
+      <h3>Tu esencia</h3>
+      <p>Eres única, especial e irrepetible. Mi persona favorita.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. GALERÍA -->
+<section id="gallery">
+  <h2>Nuestros momentos</h2>
+  <div class="gallery-grid">
+    <div class="photo">📸<br><small style="font-size:0.8rem">Foto 1</small></div>
+    <div class="photo">🌹<br><small style="font-size:0.8rem">Foto 2</small></div>
+    <div class="photo">🌅<br><small style="font-size:0.8rem">Foto 3</small></div>
+    <div class="photo">💑<br><small style="font-size:0.8rem">Foto 4</small></div>
+    <div class="photo">🎉<br><small style="font-size:0.8rem">Foto 5</small></div>
+    <div class="photo">💕<br><small style="font-size:0.8rem">Foto 6</small></div>
+  </div>
+</section>
+
+<!-- 5. CARTA -->
+<section id="letter">
+  <h2>Una carta para ti</h2>
+  <div class="envelope" onclick="this.classList.toggle('open')">
+    <div class="letter-content">
+      Mi amor,<br><br>
+      Desde que llegaste a mi vida, todo tiene más color, más sentido, más magia. 
+      Gracias por ser mi compañera, mi confidente y mi hogar.<br><br>
+      Te amo hoy, mañana y siempre. 💖<br><br>
+      <em>Tuyo, por siempre.</em>
+    </div>
+  </div>
+  <p class="hint">✨ Toca el sobre para abrirlo ✨</p>
+</section>
+
+<!-- 6. PREGUNTA -->
+<section id="question">
+  <h2>¿Me amas tanto como yo a ti?</h2>
+  <div class="buttons">
+    <button class="btn-love" id="yesBtn" onclick="sayYes()">¡Sí, te amo! 💖</button>
+    <button class="btn-love" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+  </div>
+  <div id="celebration">¡Sabía que dirías que sí! 🥰💕✨</div>
+</section>
+
+<!-- 7. FINAL -->
+<section id="final">
+  <h2>Te amo infinitamente</h2>
+  <p>Eres lo mejor que me ha pasado. Gracias por existir, por elegirme, por amarme. 
+  Quiero seguir construyendo recuerdos a tu lado, un día a la vez, para siempre.</p>
+  <div class="signature">Con todo mi amor ❤️</div>
+</section>
+
+<script>
+  // ====== PERSONALIZA AQUÍ ======
+  
+  // ==============================
+
+  // Corazones flotantes
+  function createHearts() {
+    const hearts = ['💖','💕','💗','💓','❤️','💘'];
+    for (let i = 0; i < 25; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart-bg';
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      h.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      h.style.animationDelay = Math.random() * 10 + 's';
+      h.style.opacity = Math.random() * 0.5 + 0.3;
+      document.body.appendChild(h);
+    }
+  }
+  createHearts();
+
+  // Scroll suave
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Contador
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - FECHA_INICIO;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer();
+
+  // Botón "No" travieso
+  function moveNo() {
+    const btn = document.getElementById('noBtn');
+    const maxX = window.innerWidth - btn.offsetWidth - 50;
+    const maxY = window.innerHeight - btn.offsetHeight - 50;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    btn.style.position = 'fixed';
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
+  }
+
+  // Celebración
+  function sayYes() {
+    document.getElementById('celebration').style.display = 'block';
+    // Lluvia de corazones extra
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'heart-bg';
+        h.textContent = ['💖','💕','💗','❤️'][Math.floor(Math.random()*4)];
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.fontSize = (Math.random() * 30 + 20) + 'px';
+        h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 5000);
+      }, i * 80);
+    }
+    setTimeout(() => scrollToSection('final'), 2500);
+  }
+</script>
+
+</body>
+</html>
